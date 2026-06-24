@@ -581,7 +581,7 @@ function drawYearly(){
 }
 function drawCrisis(){
   const d=BT; let h='<table><tr><th>危机窗口</th><th>磐石(上沿)</th><th>磐石(下沿)</th><th>60/40+趋势</th><th>纯股 SPY</th><th>少亏 vs SPY</th></tr>';
-  for(const c of d.crises){const less=(c.spy-c.v3_low); // 下沿口径少亏
+  for(const c of d.crises){const less=(c.v3_low-c.spy); // 下沿口径少亏(正=比SPY少跌)
     const heat=v=>`background:rgba(224,86,74,${Math.min(0.5,Math.abs(v)/40)})`;
     h+=`<tr><td>${c.name}</td><td class="mono" style="${heat(c.v3_high)}">${c.v3_high}%</td><td class="mono" style="${heat(c.v3_low)}">${c.v3_low}%</td><td class="mono" style="${heat(c.b6040)}">${c.b6040}%</td><td class="mono" style="${heat(c.spy)}">${c.spy}%</td><td class="mono pos">少亏 ${less.toFixed(1)}pp</td></tr>`;}
   h+='</table><p class="sm mut3" style="margin-top:6px">同口径(日度峰谷)对比。"少亏"用下沿(更保守)算。危机里磐石普遍只跌 SPY 的 5–7 成。</p>';
