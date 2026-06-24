@@ -85,12 +85,93 @@
   .navbar a{color:var(--ink2);text-decoration:none;white-space:nowrap} .navbar a:hover{color:var(--accent)}
   .progrow{display:flex;justify-content:space-between;font-size:12.5px;margin:3px 0}
   .iconbtn{cursor:pointer;color:var(--ink3);font-size:15px;background:none;border:0;padding:0 4px}
+  /* 信任卡 / 会员卡 */
+  .trust{display:flex;gap:14px;flex-wrap:wrap;background:#eef4f0;border:1px solid #cfe3d6;border-radius:12px;padding:13px 16px;margin-top:12px;align-items:center}
+  .trust .ti{display:flex;align-items:center;gap:7px;font-size:12.5px;color:#2c5e4e} .trust .ti b{color:#234b3e}
+  .member{background:linear-gradient(180deg,#fbfaf6,#f3efe6);border:1px solid var(--line2);border-radius:14px;padding:16px 18px;margin-top:12px}
+  .mtag{display:inline-flex;align-items:center;gap:6px;background:#2f6f63;color:#fff;font-size:11.5px;font-weight:700;padding:3px 11px;border-radius:20px}
+  .bill{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media(max-width:600px){.bill{grid-template-columns:1fr 1fr}}
+  .billi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 12px}
+  .billi .n{font-size:18px;font-weight:700} .billi .l{font-size:11px;color:var(--ink3);margin-top:2px}
+  .perk{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;margin:5px 0} .perk .c{color:var(--accent);font-weight:700}
+  /* gear */
+  .gear{cursor:pointer;background:none;border:1px solid var(--line2);border-radius:9px;width:34px;height:34px;font-size:16px;color:var(--ink2);padding:0;display:flex;align-items:center;justify-content:center}
+  /* modal / overlay */
+  .ov{position:fixed;inset:0;background:#1c2a2455;backdrop-filter:blur(3px);z-index:50;display:none;align-items:center;justify-content:center;padding:18px}
+  .ov.show{display:flex}
+  .modal{background:#fff;border-radius:16px;max-width:440px;width:100%;max-height:88vh;overflow-y:auto;padding:22px 22px 18px;box-shadow:0 20px 60px #0003}
+  .modal h2{font-size:19px;margin:0 0 4px} .modal .step{display:flex;gap:11px;margin:13px 0} .modal .step .n{flex:none;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .modal .step .t{font-size:13.5px;line-height:1.5} .modal .step .t b{display:block;margin-bottom:1px}
+  .chk{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink2);margin:14px 0 4px} .chk input{width:auto;margin-top:2px}
+  .mbtns{display:flex;gap:9px;margin-top:14px;flex-wrap:wrap} .mbtns button{flex:1;min-width:120px}
+  /* toast */
+  #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#23332c;color:#fff;font-size:13px;padding:10px 18px;border-radius:24px;z-index:60;opacity:0;transition:opacity .25s;pointer-events:none;box-shadow:0 6px 20px #0003;max-width:90vw}
+  #toast.show{opacity:1}
+  /* skeleton */
+  .skel{background:linear-gradient(90deg,#eeece5,#f6f5f1,#eeece5);background-size:200% 100%;animation:sk 1.3s infinite;border-radius:8px;height:13px;margin:6px 0}
+  @keyframes sk{0%{background-position:200% 0}100%{background-position:-200% 0}}
+  /* 移动端 */
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  @media(max-width:600px){
+    body{font-size:14px}
+    input,select,textarea{font-size:16px}  /* 阻止 iOS 聚焦自动缩放 */
+    .cap{font-size:17px;width:100%}
+    .tw table{min-width:470px}
+    .iconbtn{min-width:38px;min-height:38px} button.mini{padding:8px 13px;font-size:13px}
+    .navbar a{padding:5px 2px} .caprow{align-items:flex-start}
+    .trust{gap:8px} .trust .ti{width:100%}
+  }
+  .sec,.hero{scroll-margin-top:52px}
 </style>
 </head>
 <body>
 
+<div id="toast"></div>
+
+<!-- 首次引导 -->
+<div class="ov" id="onboard">
+  <div class="modal">
+    <div class="mtag">磐石管家</div>
+    <h2 style="margin-top:10px">欢迎，我来替你守纪律</h2>
+    <p class="mut sm" style="margin:2px 0 4px">一个 GPFG 式结构化组合的私人管家。三件事先说清楚：</p>
+    <div class="step"><div class="n">1</div><div class="t"><b>我不让你暴富，让你睡得着</b>历史上股灾时你大约只跌纯股的 5–7 成；代价是牛市少赚。我是风控与纪律，<b style="display:inline">不是</b>跑赢大盘。</div></div>
+    <div class="step"><div class="n">2</div><div class="t"><b>我只给清单，你自己下单</b>管家从不碰你的账户、不替你交易。所有买卖由你亲自完成。</div></div>
+    <div class="step"><div class="n">3</div><div class="t"><b>你的数据只在这台设备</b>不用注册、无账号、永不上传，断网也能用。随时可一键清空。</div></div>
+    <div class="card" style="background:#f6ecd6;border-color:#e3d2a8;margin-top:12px;padding:10px 13px"><div class="sm" style="color:#7a5a14;line-height:1.5">⚠ 本组合以<b>美元/美股</b>计价（SPY、美股动量股等），适合<b>有海外/美股账户（富途·老虎·IBKR 等）</b>的人。纯境内人民币账户暂时无法照单买入。</div></div>
+    <label class="chk"><input type="checkbox" id="agreeChk"> 我已了解：本工具仅供配置参考、<b style="display:inline">不构成投资建议</b>，市场有风险盈亏自负；管家不托管资金、不持牌。</label>
+    <div class="mbtns">
+      <button class="sec" id="obDemo">先看示例效果</button>
+      <button id="obStart" disabled>开始使用</button>
+    </div>
+  </div>
+</div>
+
+<!-- 设置 / 数据 -->
+<div class="ov" id="settings">
+  <div class="modal">
+    <h2>设置 · 数据</h2>
+    <div style="margin-top:12px"><div class="overline">计价币种参考</div>
+      <div class="sm mut" style="margin-top:5px">组合以美元计价。人民币参考汇率 1 USD = <input class="mono" id="fx" value="7.20" style="width:64px" inputmode="decimal"> CNY，<button class="ghost mini" onclick="applyFx()">应用</button> 应用后金额旁显示 ≈¥ 估算。</div>
+    </div>
+    <div style="margin-top:16px"><div class="overline">数据管理（只影响本机）</div>
+      <div class="sm mut3" style="margin:5px 0 8px">你的持仓与资金只存这台浏览器，从不上传。建议清空前先导出备份。</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="ghost mini" onclick="expBook()">导出全部数据</button>
+        <button class="ghost mini" onclick="document.getElementById('impFile').click()">导入</button>
+        <button class="ghost mini" onclick="resetForm()">重置当前表单</button>
+        <button class="ghost mini" style="border-color:#e6c4bc;color:#a03f2a" onclick="clearAll()">清空全部数据</button>
+      </div>
+    </div>
+    <div style="margin-top:16px"><div class="overline">关于 &amp; 责任</div>
+      <div class="sm mut" style="margin-top:5px;line-height:1.6">磐石管家是一套<b>规则程序</b>（不是真人、非持牌机构）做的纪律工具，不托管你一分钱、不碰你账户。数据源 Yahoo Finance，工作日云端刷新。反馈：<a href="mailto:shicao0123@gmail.com">联系</a>。版本 <span id="ver">v4</span>。</div>
+    </div>
+    <div class="mbtns"><button onclick="closeSettings()">完成</button></div>
+  </div>
+</div>
+
 <div class="navbar">
-  <a href="#hero">驾驶舱</a><a href="#diag">体检</a><a href="#book">持仓上报</a><a href="#orders">今日指令</a><a href="#bt">策略回测</a><a href="#about">关于&局限</a>
+  <a href="#hero">驾驶舱</a><a href="#member">会员</a><a href="#diag">体检</a><a href="#book">持仓上报</a><a href="#orders">今日指令</a><a href="#bt">策略回测</a><a href="#about">关于&局限</a>
 </div>
 
 <div class="hero" id="hero">
@@ -103,17 +184,46 @@
         <div class="sm mut3" style="margin-top:4px"><span class="dot"></span><span id="onduty">盯盘中…</span></div>
       </div>
     </div>
-    <div style="display:flex;align-items:center;gap:12px"><svg width="84" height="84" viewBox="0 0 84 84" id="ring"></svg></div>
+    <div style="display:flex;align-items:center;gap:10px"><svg width="84" height="84" viewBox="0 0 84 84" id="ring"></svg><button class="gear" onclick="openSettings()" title="设置·数据">⚙</button></div>
   </div>
   <div class="brief" id="brief">管家正在就位…</div>
+  <div id="greet" class="sm" style="margin-top:8px;color:#2c5e4e;display:none"></div>
   <div class="caprow">
     <span class="overline">总资金规模</span>
-    <span>$ <input class="cap mono" id="cap" value="1000000" inputmode="numeric"></span>
+    <span>$ <input class="cap mono" id="cap" value="1000000" inputmode="numeric" onchange="setCap()"> <span class="mut3 sm" id="capCny"></span></span>
     <button class="ghost mini" onclick="setCap()">应用</button>
-    <span class="mut3 sm">你打算用这套计划管理的总金额（含还没投出去的现金）。各板块目标 = 它 × 权重。只存本机。</span>
+    <span class="mut3 sm">计划管理的美元总额（含未投出的现金）；各板块目标 = 它 × 权重。改完自动生效，<b style="display:inline">只存本机</b>。</span>
   </div>
   <div id="staleBar" class="warnbar"></div>
   <div id="errBar" class="warnbar"></div>
+</div>
+
+<div class="trust">
+  <div class="ti">🔒 <span><b>只存这台设备</b>，永不上传</span></div>
+  <div class="ti">🆔 <span>无需注册 / 无账号</span></div>
+  <div class="ti">📡 <span>只下载公开行情，断网也能用</span></div>
+  <div class="ti">✋ <span>只给清单，<b>你自己下单</b></span></div>
+  <div class="ti" style="margin-left:auto"><button class="ghost mini" onclick="openSettings()">清空我的数据 ›</button></div>
+</div>
+
+<div class="member" id="member">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+    <div><span class="mtag" id="subTag">体验版</span> <span class="mut sm" id="subNote">解锁全部管家功能</span></div>
+    <button class="ghost mini" onclick="openSettings()">管理</button>
+  </div>
+  <div style="margin-top:12px"><div class="overline">本期价值对账单 · 你付的是"有人替你守纪律"的确定性</div>
+    <div class="bill" id="bill"></div>
+    <div class="sm mut3" style="margin-top:8px" id="billNote"></div>
+  </div>
+  <details style="margin-top:10px"><summary>订阅包含什么 / 为什么收费</summary>
+    <div style="margin-top:8px">
+      <div class="perk"><span class="c">✓</span><span>每个工作日云端刷新行情、维护断路器与再平衡信号</span></div>
+      <div class="perk"><span class="c">✓</span><span>每次给出"今天动/不动"的明确处方 + 动量逐只换股清单</span></div>
+      <div class="perk"><span class="c">✓</span><span>组合体检、纪律评分、建仓路线、上报账本与导出</span></div>
+      <div class="perk"><span class="c">✓</span><span>策略迭代与诚实回测更新</span></div>
+      <div class="sm mut3" style="margin-top:6px">收的是<b>持续的信号维护与纪律陪伴</b>，<b>不是</b>收益承诺。你的持仓数据永不在订阅范围内、永远只在本机。随时可取消，取消后本机数据仍可离线查看。</div>
+    </div>
+  </details>
 </div>
 
 <div class="sec" id="diag">
@@ -127,15 +237,18 @@
   <div class="overline">② My Holdings</div><div class="sec-title">我的持仓上报</div>
   <p class="sec-intro">填你<b>当前真实持有多少</b>（没买的填 0）。差额会自动算成"待投入现金"，管家据此给你建仓+再平衡路线。真实持仓只存本机，从不上传。</p>
   <div class="card">
-    <div class="overline" style="margin-bottom:6px">各板块当前持仓（金额，$）</div>
-    <table id="inp"><tr><th>板块</th><th>载体</th><th>目标权重</th><th>目标金额</th><th>我当前持有$</th><th>偏离</th></tr></table>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+      <span class="overline">各板块当前持仓（金额，$）</span>
+      <button class="ghost mini" onclick="newbieBuild()">我是新手 · 还没开始投 ›</button>
+    </div>
+    <div class="tw"><table id="inp"><tr><th>板块</th><th>载体</th><th>目标权重</th><th>目标金额</th><th>我当前持有$</th><th>偏离</th></tr></table></div>
 
     <div style="margin-top:16px" class="overline">动量持仓明细（按你实际持有的每只填，管家才能精确调）</div>
-    <table id="momTbl" style="margin-top:6px"><tr><th>代码</th><th>我持有金额$</th><th></th></tr></table>
+    <div class="tw"><table id="momTbl" style="margin-top:6px"><tr><th>代码</th><th>我持有金额$</th><th></th></tr></table></div>
     <div style="margin-top:6px"><button class="ghost mini" onclick="addMomRow()">+ 添加一只</button> <button class="ghost mini" onclick="prefillMom()">按今日榜单等权预填</button> <span class="mut3 sm">动量板块当前持仓 = 这里各只之和：<b id="momSum" class="mono">$0</b></span></div>
 
     <div style="margin-top:16px" class="overline">其他持仓（本组合之外已买的基金，可选）</div>
-    <table id="extTbl" style="margin-top:6px"><tr><th>名称</th><th>金额$</th><th>归类</th><th></th></tr></table>
+    <div class="tw"><table id="extTbl" style="margin-top:6px"><tr><th>名称</th><th>金额$</th><th>归类</th><th></th></tr></table></div>
     <div style="margin-top:6px"><button class="ghost mini" onclick="addExtRow()">+ 添加一笔</button> <span class="mut3 sm">归入某板块=计入该板块持仓（如沪深300ETF→A股）；策略外=管家单独提示，不计入本组合。</span></div>
 
     <div class="card" style="background:var(--card2);margin-top:16px">
@@ -148,7 +261,8 @@
 
     <label class="sm mut" style="display:inline-block;margin:12px 0 4px"><input type="checkbox" id="rebChk" style="width:auto"> 我已按上次指令调过仓</label><br>
     <button onclick="report()">上报并体检</button>
-    <button class="sec" onclick="diagnose(false)">仅试算（不保存）</button>
+    <button class="sec" onclick="diagnose(false)" title="只看结果、不计入你的历史账本">仅试算（不保存）</button>
+    <div class="sm mut3" style="margin-top:10px">数据只存这台设备，<button class="ghost mini" onclick="resetForm()">重置表单</button> <button class="ghost mini" style="border-color:#e6c4bc;color:#a03f2a" onclick="clearAll()">清空全部数据</button></div>
 
     <details id="ledgerWrap" style="display:none"><summary>我的上报历史</summary>
       <div id="ledger" style="margin-top:8px"></div>
@@ -225,8 +339,47 @@ let BOOK=JSON.parse(localStorage.getItem('pb_book')||'[]');
 (function(){const s=localStorage.getItem('pb_cap'); if(s){CAP=+s; $('cap').value=s;}})();
 const SLCOL={'美股':'#5a82a8','动量':'#a98b3d','趋势':'#8a7bb0','国债':'#3a8f63','黄金':'#cda23e','A股':'#c0563f','港股':'#cf8aa6','现金':'#b3b3aa'};
 const INVEST=['美股','动量','趋势','国债','黄金','A股','港股']; // 7个可投板块(不含现金)
+let FX=+(localStorage.getItem('pb_fx')||0); // 人民币参考汇率, 0=不显示
 
-function setCap(){const v=+$('cap').value.replace(/[^0-9.]/g,'')||1000000; CAP=v; $('cap').value=v; localStorage.setItem('pb_cap',v); renderAll();}
+function setCap(){const v=+$('cap').value.replace(/[^0-9.]/g,'')||1000000; CAP=v; $('cap').value=v; localStorage.setItem('pb_cap',v); updateCny(); renderAll();}
+
+function toast(m){const t=$('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(window._tt); window._tt=setTimeout(()=>t.classList.remove('show'),2300);}
+function openSettings(){$('fx').value=FX||7.20; $('settings').classList.add('show');}
+function closeSettings(){$('settings').classList.remove('show');}
+function applyFx(){FX=+$('fx').value||0; localStorage.setItem('pb_fx',FX); updateCny(); if(STRAT)renderAll(); toast('已应用人民币参考汇率');}
+function updateCny(){const e=$('capCny'); if(e)e.textContent=FX?('≈ ¥'+Math.round(CAP*FX).toLocaleString('en-US')):'';}
+function resetForm(){ if(!confirm('把当前表单清成全 0？不影响已保存的历史账本。'))return;
+  INVEST.forEach(k=>{const el=$('amt_'+k); if(el)el.value=0;});
+  document.querySelectorAll('.momrow').forEach(r=>r.remove()); addMomRow();
+  document.querySelectorAll('.extrow').forEach(r=>r.remove());
+  if($('myMom'))$('myMom').value=''; $('rebChk').checked=false; closeSettings(); recompute(); toast('表单已重置'); }
+function clearAll(){ if(!confirm('清空本机全部数据？将删除：上报历史账本 + 资金规模 + 所有持仓输入，回到首次打开状态。建议先导出备份。此操作不可恢复。'))return;
+  localStorage.removeItem('pb_book'); localStorage.removeItem('pb_cap'); BOOK=[]; CAP=1000000; closeSettings(); toast('已清空本机全部数据'); setTimeout(()=>location.reload(),600); }
+function newbieBuild(){ INVEST.forEach(k=>{const el=$('amt_'+k); if(el)el.value=0;});
+  document.querySelectorAll('.momrow').forEach(r=>r.remove()); addMomRow();
+  document.querySelectorAll('.extrow').forEach(r=>r.remove());
+  diagnose(false); document.getElementById('orders').scrollIntoView({behavior:'smooth'}); toast('已按"从零建仓"生成路线，照着分批买即可'); }
+function loadDemo(){ $('cap').value=1000000; CAP=1000000; localStorage.setItem('pb_cap',1000000); updateCny();
+  buildForm(); $('amt_美股').value=300000; $('amt_黄金').value=50000; $('amt_国债').value=120000;
+  document.querySelectorAll('.momrow').forEach(r=>r.remove()); (STRAT?STRAT.momentum.slice(0,5):[]).forEach(m=>addMomRow(m.ticker,40000));
+  diagnose(false); toast('已载入示例（未保存），随便看；用真数据请先清空再填'); document.getElementById('diag').scrollIntoView({behavior:'smooth'}); }
+function maybeOnboard(){ if(localStorage.getItem('pb_onboarded'))return;
+  $('onboard').classList.add('show');
+  $('agreeChk').onchange=e=>{$('obStart').disabled=!e.target.checked;};
+  $('obStart').onclick=()=>{ if(!$('agreeChk').checked)return; localStorage.setItem('pb_onboarded','1'); $('onboard').classList.remove('show'); };
+  $('obDemo').onclick=()=>{ localStorage.setItem('pb_onboarded','1'); $('onboard').classList.remove('show'); loadDemo(); }; }
+function renderMember(){
+  const cb=STRAT.circuit, reports=BOOK.length;
+  const daysTracked=reports?Math.max(0,daysBetween(BOOK[0].ts,new Date().toISOString())):0;
+  let crisisAvg='—'; if(BT&&BT.crises&&BT.crises.length){const r=BT.crises.map(c=>c.v3_low/c.spy); crisisAvg=Math.round(r.reduce((a,b)=>a+b,0)/r.length*100)+'%';}
+  const bill=[{n:reports,l:'累计上报次数'},{n:daysTracked+' 天',l:'已替你盯盘'},{n:cb.status.replace(/\(.*/,''),l:'断路器状态'},{n:crisisAvg,l:'历史危机仅跌SPY的'}];
+  $('bill').innerHTML=bill.map(b=>`<div class="billi"><div class="n mono">${b.n}</div><div class="l">${b.l}</div></div>`).join('');
+  $('billNote').innerHTML=reports?`这段时间管家替你维护着信号与纪律——你付的不是跑赢，是"<b style="display:inline">该不动时有人替你扛住不动</b>"的确定性。`:`开始上报后，这里结算"管家替你守住了什么"——断路器、纪律分、回撤控制，全是风控事实，不是收益承诺。`;
+}
+function renderGreet(ctx){ const g=$('greet'); if(!BOOK.length){g.style.display='none';return;}
+  const d=ctx&&ctx.daysSinceReport!=null?ctx.daysSinceReport:daysBetween(BOOK[BOOK.length-1].ts,new Date().toISOString());
+  const act=ctx&&['NEEDS_REBALANCE','MOMENTUM_OVER','CIRCUIT_ALERT','BUILDING'].includes(ctx.state);
+  g.style.display='block'; g.innerHTML=`👋 欢迎回来，距上次上报 <b>${d}</b> 天。${act?'今天<b style="display:inline">建议看一下处方</b>。':'今天<b style="display:inline">无需操作</b>——管家替你盯着。'}`; }
 
 Promise.all([
   fetch('data/latest.json?t='+Date.now()).then(r=>r.json()),
@@ -242,12 +395,12 @@ function renderAll(){
   $('onduty').textContent='盯盘中 · 上次巡检 '+STRAT.generatedAt.slice(0,16).replace('T',' ')+' UTC';
   const ago=daysBetween(STRAT.asOf,new Date().toISOString());
   if(ago>5){$('staleBar').style.display='block'; $('staleBar').textContent='⏳ 行情数据已 '+ago+' 天未刷新（工作日云端刷新）。下单前请核对实时价。';}
-  buildForm(); renderVitals(); if(BT)renderBacktest();
+  buildForm(); renderVitals(); if(BT)renderBacktest(); updateCny(); renderMember();
   const last=BOOK[BOOK.length-1];
-  if(last){loadSnap(last); diagnose(false,last);}
-  else {heroState('FIRST_USE',null); recompute(); $('rxBox').innerHTML='<div class="mut">填好上方持仓、点"上报并体检"，管家在此给出今日处方。</div>';}
-  renderLedger();
-  $('foot').innerHTML='磐石管家 · GPFG 式结构化 beta 组合（非 alpha，价值在风控与纪律）。数据 Yahoo Finance，工作日云端自动刷新。本工具只产出建议清单，由你自己核对实时价并下单，不构成投资建议。';
+  if(last){loadSnap(last); const ctx=diagnose(false,last); renderGreet(ctx);}
+  else {heroState('FIRST_USE',null); recompute(); renderGreet(null); $('rxBox').innerHTML='<div class="mut">填好上方持仓、点"上报并体检"，管家在此给出今日处方。新手可点右上"我是新手"一键生成建仓路线。</div>';}
+  renderLedger(); maybeOnboard();
+  $('foot').innerHTML='磐石管家 · GPFG 式结构化 beta 组合（非 alpha，价值在风控与纪律）。数据 Yahoo Finance，工作日云端自动刷新。本工具只产出建议清单、由你自己核对实时价并下单，<b style="display:inline">不构成投资建议</b>；管家是规则程序、非持牌机构、不托管资金。隐私：你的持仓只存本机、永不上传。反馈 <a href="mailto:shicao0123@gmail.com">shicao0123@gmail.com</a> · v4';
 }
 
 /* ---------- 表单 ---------- */
@@ -365,7 +518,7 @@ function diagnose(save,presnap){
   else if(trig)state='NEEDS_REBALANCE';
   const scoreShow=building?null:score;
   const ctx={snap,actual,deployed,cash,outside,rows,maxDrift,momW,momActual,planned,daysSinceReport,daysSinceReb,building,uninvestRatio,target,heldMap,perName,momPlan,cb,score:scoreShow,state};
-  renderDiagnosis(ctx); return ctx;
+  renderDiagnosis(ctx); renderMember(); renderGreet(ctx); return ctx;
 }
 function report(){diagnose(true);}
 
@@ -448,15 +601,15 @@ function renderRx(ctx){
   $('rxBox').innerHTML=html; window._rx=rx;
 }
 function rxRow(r){const cls=r.act==='buy'?'buy':r.act==='sell'?'sell':''; return `<div class="rx"><span class="p ${r.c}">${r.p}</span><div><div class="${cls}" style="font-weight:600">${r.t}</div><div class="mut3 sm">${r.d}</div></div></div>`;}
-function copyRx(){const txt='磐石管家·今日指令 '+new Date().toLocaleDateString('zh-CN')+'\n'+(window._rx||[]).filter(r=>r.act).map(r=>'· '+r.t).join('\n'); navigator.clipboard.writeText(txt).then(()=>alert('已复制清单，去券商照单下单即可。'),()=>alert(txt));}
-function markDone(){const s=readForm(); s.rebalanced=true; BOOK.push(s); if(BOOK.length>200)BOOK=BOOK.slice(-200); localStorage.setItem('pb_book',JSON.stringify(BOOK)); $('rebChk').checked=true; renderLedger(); alert('已记一笔"已下单"快照到本地账本。'); diagnose(false);}
+function copyRx(){const txt='磐石管家·今日指令 '+new Date().toLocaleDateString('zh-CN')+'\n'+(window._rx||[]).filter(r=>r.act).map(r=>'· '+r.t).join('\n'); if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(()=>toast('已复制指令清单，去券商照单下单即可'),()=>toast('复制失败，请在指令区长按手动复制'));}else toast('该环境不支持自动复制，请长按手动复制');}
+function markDone(){const s=readForm(); s.rebalanced=true; BOOK.push(s); if(BOOK.length>200)BOOK=BOOK.slice(-200); localStorage.setItem('pb_book',JSON.stringify(BOOK)); $('rebChk').checked=true; renderLedger(); renderMember(); toast('已记一笔"已下单"快照到本机账本'); diagnose(false);}
 
 /* ---------- 账本 ---------- */
 function renderLedger(){if(!BOOK.length){$('ledgerWrap').style.display='none';return;} $('ledgerWrap').style.display='block';
   $('ledger').innerHTML=BOOK.slice().reverse().slice(0,30).map(s=>{const c=computeActual(s); return `<div class="lrow"><span class="mono mut3">${s.ts.slice(0,10)}</span><span class="mut">已投 ${fmtw(c.deployed)} · ${(s.momStocks||[]).length} 只动量 ${s.rebalanced?'· 已调仓':''}</span><span class="mono">${fmtw(s.capital)}</span></div>`;}).join('');}
 function expBook(){const b=new Blob([JSON.stringify(BOOK,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='磐石管家-账本-'+new Date().toISOString().slice(0,10)+'.json'; a.click();}
-function impBook(e){const f=e.target.files[0]; if(!f)return; const rd=new FileReader(); rd.onload=()=>{try{const arr=JSON.parse(rd.result); const m={}; [...BOOK,...arr].forEach(s=>m[s.ts]=s); BOOK=Object.values(m).sort((a,b)=>a.ts<b.ts?-1:1).slice(-200); localStorage.setItem('pb_book',JSON.stringify(BOOK)); renderLedger(); alert('已导入合并，共 '+BOOK.length+' 条。');}catch(x){alert('导入失败：'+x.message);}}; rd.readAsText(f);}
-function clearBook(){if(confirm('确定清空本地账本？(可先导出备份)')){BOOK=[]; localStorage.removeItem('pb_book'); renderLedger(); alert('已清空。');}}
+function impBook(e){const f=e.target.files[0]; if(!f)return; const rd=new FileReader(); rd.onload=()=>{try{const arr=JSON.parse(rd.result); const m={}; [...BOOK,...arr].forEach(s=>m[s.ts]=s); BOOK=Object.values(m).sort((a,b)=>a.ts<b.ts?-1:1).slice(-200); localStorage.setItem('pb_book',JSON.stringify(BOOK)); renderLedger(); renderMember(); toast('已导入合并，共 '+BOOK.length+' 条');}catch(x){toast('导入失败：'+x.message);}}; rd.readAsText(f);}
+function clearBook(){if(confirm('确定清空上报历史账本？(可先导出备份)')){BOOK=[]; localStorage.removeItem('pb_book'); renderLedger(); renderMember(); toast('已清空账本');}}
 
 /* ---------- 回测 ---------- */
 function toggleLog(){logScale=!logScale; $('logBtn').style.background=logScale?'var(--accent)':'transparent'; $('logBtn').style.color=logScale?'#fff':'var(--ink2)'; drawNav();}
