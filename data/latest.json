@@ -1,0 +1,131 @@
+{
+  "asOf": "2026-06-24",
+  "generatedAt": "2026-06-24T16:38:07.328Z",
+  "capitalBase": 1000000,
+  "universeCount": 66,
+  "risk": {
+    "spyAboveMA200": true,
+    "spyPrice": 737,
+    "spyMA200Adj": 685.97,
+    "ddFromHigh": -0.0272
+  },
+  "circuit": {
+    "mom3y": 1.6442,
+    "spy3y": 0.7408,
+    "excess": 0.9034,
+    "momentumWeight": 0.2,
+    "status": "正常满仓"
+  },
+  "momentum": [
+    {
+      "ticker": "MU",
+      "price": 1037.95,
+      "mom": 7.5226,
+      "volRatio": 1.47
+    },
+    {
+      "ticker": "INTC",
+      "price": 133.22,
+      "mom": 5.2869,
+      "volRatio": 1.21
+    },
+    {
+      "ticker": "GE",
+      "price": 367.5,
+      "mom": 0.4908,
+      "volRatio": 1.1
+    },
+    {
+      "ticker": "TXN",
+      "price": 304.53,
+      "mom": 0.5546,
+      "volRatio": 1.06
+    },
+    {
+      "ticker": "CSCO",
+      "price": 120.31,
+      "mom": 0.8266,
+      "volRatio": 1.06
+    },
+    {
+      "ticker": "AVGO",
+      "price": 384.91,
+      "mom": 0.5279,
+      "volRatio": 1.01
+    },
+    {
+      "ticker": "AMAT",
+      "price": 588.21,
+      "mom": 2.4457,
+      "volRatio": 1
+    },
+    {
+      "ticker": "ABBV",
+      "price": 234.65,
+      "mom": 0.3185,
+      "volRatio": 0.99
+    },
+    {
+      "ticker": "GS",
+      "price": 1083.65,
+      "mom": 0.7089,
+      "volRatio": 0.98
+    },
+    {
+      "ticker": "MS",
+      "price": 221.67,
+      "mom": 0.6942,
+      "volRatio": 0.97
+    }
+  ],
+  "sleeves": [
+    {
+      "key": "美股",
+      "etf": "SPY",
+      "weight": 0.3,
+      "price": 737
+    },
+    {
+      "key": "动量",
+      "etf": "(你的10只)",
+      "weight": 0.2,
+      "isMomentum": true
+    },
+    {
+      "key": "趋势",
+      "etf": "DBMF",
+      "weight": 0.15,
+      "price": 30.5
+    },
+    {
+      "key": "国债",
+      "etf": "IEF",
+      "weight": 0.22,
+      "price": 94.71
+    },
+    {
+      "key": "黄金",
+      "etf": "GLD",
+      "weight": 0.05,
+      "price": 368.97
+    },
+    {
+      "key": "A股",
+      "etf": "ASHR",
+      "weight": 0.025,
+      "price": 35.92
+    },
+    {
+      "key": "港股",
+      "etf": "FXI",
+      "weight": 0.025,
+      "price": 32.49
+    },
+    {
+      "key": "现金",
+      "etf": "(货币基金)",
+      "weight": 0.03,
+      "isCash": true
+    }
+  ]
+}

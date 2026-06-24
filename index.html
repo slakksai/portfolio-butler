@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>投资管家 · 个人组合策略</title>
+<style>
+  :root{--g:#2a7a52;--g2:#1f5e3f;--r:#c0392b;--amber:#c67b00;--ink:#1a1a1a;--mut:#777;--line:#e3e3e3;--bg:#f6f7f5;--card:#fff}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Microsoft YaHei",sans-serif;max-width:920px;margin:0 auto;padding:18px 16px 60px;color:var(--ink);background:var(--bg);line-height:1.5}
+  h1{font-size:21px;margin:0 0 2px} .sub{color:var(--mut);font-size:12.5px;margin:0 0 16px}
+  h2{font-size:15px;margin:26px 0 8px;border-left:4px solid var(--g);padding-left:9px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  table{border-collapse:collapse;width:100%;font-size:13.5px}
+  th,td{border-bottom:1px solid #eee;padding:7px 8px;text-align:right} th{background:#fafafa;color:#555;font-weight:600} td:first-child,th:first-child{text-align:left}
+  tr:last-child td{border-bottom:0}
+  input{width:88px;text-align:right;padding:4px 6px;border:1px solid #ccc;border-radius:5px;font-size:13px;font-family:inherit}
+  input.wide{width:100%;text-align:left}
+  button{background:var(--g);color:#fff;border:0;padding:10px 24px;border-radius:7px;font-size:14.5px;cursor:pointer;font-family:inherit}
+  button:hover{background:var(--g2)} button.sec{background:#eee;color:#333}
+  .badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600;margin-right:6px}
+  .b-ok{background:#e7f5ec;color:var(--g2)} .b-warn{background:#fdf0dc;color:var(--amber)} .b-bad{background:#fbe9e7;color:var(--r)}
+  .buy{color:var(--r);font-weight:700} .sell{color:var(--g);font-weight:700} .hold{color:var(--mut)}
+  .big{font-size:16px;font-weight:700} .mut{color:var(--mut)} .sm{font-size:12px}
+  .kv{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13.5px;margin:6px 0}
+  .kv b{font-size:15px}
+  .act{background:#f3f8f4;border:1px solid #d9ebe0;border-radius:8px;padding:10px 13px;margin-top:10px;font-size:13.5px}
+  .act .now{color:var(--g2);font-weight:700}
+  .cap-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .cap-row input{width:140px;font-size:15px;text-align:right}
+  .warnbar{background:#fbe9e7;color:var(--r);border:1px solid #f3c0b9;border-radius:8px;padding:8px 12px;font-size:13px;margin:10px 0;display:none}
+  details{margin-top:8px} summary{cursor:pointer;color:var(--g2);font-size:13px}
+  .foot{color:var(--mut);font-size:11.5px;margin-top:30px;border-top:1px solid var(--line);padding-top:12px}
+  a{color:var(--g2)}
+</style>
+</head>
+<body>
+<h1>投资管家 · 个人组合策略</h1>
+<p class="sub" id="meta">加载中…</p>
+
+<div id="staleBar" class="warnbar"></div>
+<div id="errBar" class="warnbar"></div>
+
+<div class="card cap-row">
+  <span>我的资金量</span>
+  <span>$ <input id="cap" value="1000000" inputmode="numeric"></span>
+  <button class="sec" onclick="setCap()">应用</button>
+  <span class="mut sm">只影响金额/股数显示，权重不变；浏览器记住你填的值。</span>
+</div>
+
+<h2>① 今日指令</h2>
+<div class="card" id="dash">…</div>
+
+<h2>② 动量池 · 今日选股（前 20 动量取量比前 10，等权）</h2>
+<div class="card"><div id="mom">…</div></div>
+
+<h2>③ 各板块 · 目标持仓</h2>
+<div class="card"><div id="sleeves">…</div></div>
+
+<h2>④ 调仓计算器（填你当前持仓 → 出确切买卖指令）</h2>
+<div class="card">
+  <p class="mut sm">ETF 填股数（现价已预填最新值，可改成你的成交价）；动量/现金填金额。点"计算"。</p>
+  <table id="inp"><tr><th>板块</th><th>载体</th><th>股数</th><th>现价$</th><th>金额$</th><th>目标</th></tr></table>
+  <label class="sm" style="display:inline-block;margin:10px 0"><input type="checkbox" id="sched" style="width:auto"> 今天是<b>计划调仓日</b>（季度首日 / 每年 1 月）——勾上则强制按指令归位</label><br>
+  <button onclick="calc()">计算调仓指令</button>
+  <div id="out" style="margin-top:14px;display:none"></div>
+
+  <details>
+    <summary>动量 10 只的换股清单（填你当前持有的动量代码）</summary>
+    <div style="margin-top:8px">
+      <input class="wide" id="myMom" placeholder="例: MU,INTC,GE,NVDA,AAPL （逗号分隔，大小写不限）">
+      <button class="sec" style="margin-top:8px;padding:7px 16px" onclick="momDiff()">算换股</button>
+      <div id="momOut" style="margin-top:10px"></div>
+    </div>
+  </details>
+</div>
+
+<h2>⑤ 操作节奏（速查）</h2>
+<div class="card sm" style="line-height:1.9">
+<b>每两周</b>：动量换 2–3 只（卖跌出榜的、买新进的），其余 7 块不碰。<br>
+<b>每季度首日</b>（1/4/7/10 月）：勾"计划调仓日" → 按计算器指令归位；顺手把动量 10 只拉回等权。<br>
+<b>每年 1 月</b>：同上 + 断路器复检（动量近 3 年跑赢 SPY 没；差于 −10% 降半仓、差于 −25% 熔断退回 SPY）。<br>
+<b>其余时间</b>：不动；不安心就来跑一下计算器，它说"不触发"就真什么都别做。<br>
+<span class="mut">铁律：机械、低频、不追新闻。动量是唯一主动边，其余被动收 beta。诚实预期 Sharpe≈0.82 是天花板，会跑输纯股的 FOMO 年份要扛住。</span>
+</div>
+
+<div class="foot" id="foot"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const fmt=x=>'$'+Math.round(x).toLocaleString('en-US');
+const pct=x=>(x*100).toFixed(1)+'%';
+let DATA=null, CAP=1000000;
+
+// 资金量持久化
+(function(){ const s=localStorage.getItem('pb_cap'); if(s){CAP=+s; $('cap').value=s;} })();
+function setCap(){ const v=+$('cap').value.replace(/[^0-9.]/g,'')||1000000; CAP=v; $('cap').value=v; localStorage.setItem('pb_cap',v); render(); }
+
+fetch('data/latest.json?t='+Date.now()).then(r=>r.json()).then(d=>{DATA=d;render();}).catch(e=>{
+  $('errBar').style.display='block'; $('errBar').textContent='⚠ 数据加载失败：'+e.message+'（首次部署或网络问题，稍后刷新）';
+  $('meta').textContent='数据未就绪';
+});
+
+function daysAgo(iso){ const d=new Date(iso+'T00:00:00'); return Math.round((Date.now()-d)/864e5); }
+
+function todaysAction(){
+  const now=new Date(), mo=now.getMonth()+1, dom=now.getDate();
+  const quarterStart=[1,4,7,10].includes(mo)&&dom<=5;
+  const yearStart=mo===1&&dom<=5;
+  let h='<div class="act"><div class="now">▶ 今天（'+now.toISOString().slice(0,10)+'）该做：</div>';
+  h+='<b>动量轮动</b>（常规·≈每两周）：对照下面"动量池"10 只 vs 你现持有的动量股，卖跌出榜的、买新进的（通常 2–3 只），其余 7 块不碰。';
+  if(quarterStart) h+='<br><b style="color:#c67b00">★ 本月季度初</b>：额外做季度再平衡——用下面④计算器，勾"计划调仓日"，按指令把各板块调回目标。';
+  if(yearStart) h+='<br><b style="color:#c0392b">★ 年初 1 月</b>：额外复检断路器（已在上面"今日指令"算好），据 3 年超额设动量权重。';
+  if(!quarterStart&&!yearStart) h+='<br><span class="mut">非季度初/年初：被动 7 块原则上不碰；偏离>5个百分点才用④计算器调。</span>';
+  h+='</div>'; return h;
+}
+
+function render(){
+  if(!DATA) return;
+  const d=DATA;
+  $('meta').innerHTML='数据截至 <b>'+d.asOf+'</b> · 动量宇宙 '+d.universeCount+' 只 · 引擎生成 '+d.generatedAt.slice(0,16).replace('T',' ')+' UTC';
+  const ago=daysAgo(d.asOf);
+  if(ago>5){ $('staleBar').style.display='block'; $('staleBar').textContent='⚠ 数据已 '+ago+' 天未刷新（云端定时任务工作日运行；周末/节假日正常）。下单前请核对实时价。'; }
+
+  // 仪表盘
+  const c=d.circuit, rk=d.risk;
+  const cbCls=c.momentumWeight===0.2?'b-ok':c.momentumWeight===0.1?'b-warn':'b-bad';
+  let h='<div class="kv">';
+  h+='<span>风险背景：<span class="badge '+(rk.spyAboveMA200?'b-ok':'b-bad')+'">'+(rk.spyAboveMA200?'SPY 在 200 日均线上方（趋势健康）':'SPY 跌破 200 日均线（转弱）')+'</span> 距一年高点 <b>'+pct(rk.ddFromHigh)+'</b></span>';
+  h+='</div><div class="kv">';
+  h+='<span>断路器：<span class="badge '+cbCls+'">动量权重 '+pct(c.momentumWeight)+'（'+c.status+'）</span></span>';
+  h+='<span class="mut sm">动量引擎近 3 年 '+pct(c.mom3y)+' vs SPY '+pct(c.spy3y)+' → 超额 <b>'+pct(c.excess)+'</b></span>';
+  h+='</div>';
+  h+=todaysAction();
+  $('dash').innerHTML=h;
+
+  // 动量池
+  const momW=c.momentumWeight, per=momW>0?momW*CAP/10:0;
+  if(momW>0){
+    let m='<table><tr><th>代码</th><th>目标金额</th><th>≈股数</th><th>现价</th><th>年动量</th><th>量比</th></tr>';
+    for(const p of d.momentum){ m+='<tr><td><b>'+p.ticker+'</b></td><td>'+fmt(per)+'</td><td>'+Math.round(per/p.price)+' 股</td><td>$'+p.price.toFixed(2)+'</td><td>'+pct(p.mom)+'</td><td>'+p.volRatio.toFixed(2)+'</td></tr>'; }
+    m+='</table><p class="mut sm">10 只等权，各占总仓 '+pct(momW/10)+'（共 '+pct(momW)+'）。资金量 '+fmt(CAP)+'。</p>';
+    $('mom').innerHTML=m;
+  } else $('mom').innerHTML='<p class="big" style="color:var(--r)">动量已熔断（0%），这部分并入 SPY。</p>';
+
+  // 板块目标
+  let s='<table><tr><th>板块</th><th>载体</th><th>目标权重</th><th>目标金额</th><th>现价</th><th>≈股数</th></tr>';
+  for(const sl of d.sleeves){ const amt=sl.weight*CAP;
+    let shy=sl.isMomentum?'<span class="mut">见②动量池</span>':sl.isCash?'<span class="mut">货币基金</span>':(Math.round(amt/sl.price)+' 股');
+    let px=sl.price!=null?'$'+sl.price.toFixed(2):'—';
+    s+='<tr><td>'+sl.key+'</td><td>'+sl.etf+'</td><td>'+pct(sl.weight)+'</td><td>'+fmt(amt)+'</td><td>'+px+'</td><td>'+shy+'</td></tr>'; }
+  s+='</table>';
+  $('sleeves').innerHTML=s;
+
+  buildCalc();
+  $('foot').innerHTML='投资管家 · GPFG 式结构化组合（非 alpha，结构+纪律）。数据 Yahoo Finance，每个工作日云端自动刷新。<br>本工具只产出"建议清单"，由你自己核对实时价并下单。';
+}
+
+// 计算器建表(用 latest.json 的目标权重+现价)
+function buildCalc(){
+  const inp=$('inp'); inp.querySelectorAll('tr:not(:first-child)').forEach(r=>r.remove());
+  DATA.sleeves.forEach((s,i)=>{
+    const tr=document.createElement('tr');
+    if(s.isMomentum||s.isCash){
+      const def=Math.round(s.weight*CAP);
+      tr.innerHTML='<td>'+s.key+'</td><td>'+s.etf+'</td><td>—</td><td>—</td><td><input id="amt'+i+'" value="'+def+'"></td><td>'+pct(s.weight)+'</td>';
+    }else{
+      const def=Math.round(s.weight*CAP/s.price);
+      tr.innerHTML='<td>'+s.key+'</td><td>'+s.etf+'</td><td><input id="sh'+i+'" value="'+def+'"></td><td><input id="px'+i+'" value="'+s.price.toFixed(2)+'"></td><td id="v'+i+'">—</td><td>'+pct(s.weight)+'</td>';
+    }
+    inp.appendChild(tr);
+  });
+}
+
+function calc(){
+  const S=DATA.sleeves; const v=[]; let tot=0;
+  S.forEach((s,i)=>{ let val;
+    if(s.isMomentum||s.isCash){ val=+$('amt'+i).value||0; }
+    else{ const sh=+$('sh'+i).value||0, px=+$('px'+i).value||0; val=sh*px; $('v'+i).textContent=fmt(val); }
+    v[i]=val; tot+=val; });
+  let maxDrift=0, momW=0;
+  const rows=S.map((s,i)=>{ const w=v[i]/tot, dd=w-s.weight; maxDrift=Math.max(maxDrift,Math.abs(dd)); if(s.isMomentum)momW=w; return {s,i,val:v[i],w,d:dd}; });
+  const sched=$('sched').checked, trig=sched||maxDrift>0.05||momW>0.25;
+  let h='<div class="big">当前组合总值 '+fmt(tot)+'</div>';
+  h+='<table><tr><th>板块</th><th>当前值</th><th>当前权重</th><th>目标</th><th>偏离</th></tr>';
+  rows.forEach(r=>{ const cls=Math.abs(r.d)>0.05?'sell':'hold'; h+='<tr><td>'+r.s.key+'</td><td>'+fmt(r.val)+'</td><td>'+pct(r.w)+'</td><td>'+pct(r.s.weight)+'</td><td class="'+cls+'">'+(r.d>=0?'+':'')+pct(r.d)+'</td></tr>'; });
+  h+='</table><p class="sm">最大偏离 <b>'+pct(maxDrift)+'</b> | 计划调仓日 '+(sched?'是':'否')+' | 动量>25% '+(momW>0.25?'是':'否')+'</p>';
+  if(!trig){
+    h+='<p class="big" style="color:var(--g2)">⇒ 不触发：偏离 < 5 个百分点且非计划日。今天什么都不用做（动量双周轮动除外）。</p>';
+  }else{
+    h+='<p class="big" style="color:var(--amber)">⇒ 触发调仓'+(sched?'（计划日）':'（偏离超 5 个百分点）')+'。指令：</p><table><tr><th>板块</th><th>操作</th><th>金额</th><th>≈股数</th></tr>';
+    rows.forEach(r=>{ const target=r.s.weight*tot, delta=target-r.val;
+      if(Math.abs(delta)<tot*0.003){ h+='<tr><td>'+r.s.key+'</td><td class="hold">持有不动</td><td>—</td><td>—</td></tr>'; return; }
+      const buy=delta>0, cls=buy?'buy':'sell', act=buy?'买入':'卖出';
+      let sh='—'; if(!r.s.isMomentum&&!r.s.isCash){ const px=+$('px'+r.i).value||0; sh=Math.round(Math.abs(delta)/px)+' 股'; }
+      const note=r.s.isMomentum?'<span class="mut sm">（整体'+act+'；用下面"换股清单"定具体哪只）</span>':'';
+      h+='<tr><td>'+r.s.key+'</td><td class="'+cls+'">'+act+'</td><td class="'+cls+'">'+fmt(Math.abs(delta))+'</td><td>'+sh+' '+note+'</td></tr>'; });
+    h+='</table><p class="mut sm">执行后所有板块回到目标权重。</p>';
+  }
+  $('out').innerHTML=h; $('out').style.display='block';
+}
+
+function momDiff(){
+  const target=DATA.momentum.map(p=>p.ticker);
+  const held=($('myMom').value.toUpperCase().match(/[A-Z\.]+/g)||[]);
+  const toBuy=target.filter(t=>!held.includes(t));
+  const toSell=held.filter(t=>!target.includes(t));
+  const keep=target.filter(t=>held.includes(t));
+  const momW=DATA.circuit.momentumWeight, per=momW>0?momW*CAP/10:0;
+  let h='';
+  if(momW===0){ $('momOut').innerHTML='<p style="color:var(--r)">动量已熔断（0%），全部清掉并入 SPY。</p>'; return; }
+  h+='<p class="sm">动量每只目标 '+fmt(per)+'（资金量 '+fmt(CAP)+'）。</p>';
+  h+='<table><tr><th>操作</th><th>代码</th></tr>';
+  toSell.forEach(t=>h+='<tr><td class="sell">卖出（跌出榜）</td><td>'+t+'</td></tr>');
+  toBuy.forEach(t=>{ const p=DATA.momentum.find(x=>x.ticker===t); h+='<tr><td class="buy">买入（新进）</td><td>'+t+' ≈ '+Math.round(per/p.price)+' 股 @ $'+p.price.toFixed(2)+'</td></tr>'; });
+  if(!toBuy.length&&!toSell.length) h+='<tr><td class="hold">无需换股</td><td>10 只全在榜</td></tr>';
+  keep.forEach(t=>h+='<tr><td class="hold">保留</td><td>'+t+'</td></tr>');
+  h+='</table>';
+  if(toBuy.length||toSell.length) h+='<p class="mut sm">换股后顺手把 10 只拉回等权（各 '+fmt(per)+'），防单股堆太大。</p>';
+  $('momOut').innerHTML=h;
+}
+</script>
+</body>
+</html>
