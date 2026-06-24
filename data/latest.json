@@ -1,38 +1,38 @@
 {
   "asOf": "2026-06-24",
-  "generatedAt": "2026-06-24T20:14:07.321Z",
+  "generatedAt": "2026-06-24T21:10:59.017Z",
   "capitalBase": 1000000,
   "universeCount": 66,
   "risk": {
     "spyAboveMA200": true,
-    "spyPrice": 733.2999877929688,
+    "spyPrice": 733.239990234375,
     "spyMA200Adj": 685.95,
-    "ddFromHigh": -0.0321
+    "ddFromHigh": -0.0322
   },
   "circuit": {
-    "mom3y": 1.6363,
-    "spy3y": 0.732,
-    "excess": 0.9042,
+    "mom3y": 1.6359,
+    "spy3y": 0.7319,
+    "excess": 0.904,
     "momentumWeight": 0.2,
     "status": "正常满仓"
   },
   "momentum": [
     {
       "ticker": "MU",
-      "price": 1047.92,
-      "mom": 7.6044,
+      "price": 1048.51,
+      "mom": 7.6093,
       "volRatio": 1.48
     },
     {
       "ticker": "INTC",
-      "price": 131.91,
-      "mom": 5.2251,
+      "price": 131.65,
+      "mom": 5.2128,
       "volRatio": 1.22
     },
     {
       "ticker": "GE",
-      "price": 365.71,
-      "mom": 0.4836,
+      "price": 365.88,
+      "mom": 0.4843,
       "volRatio": 1.11
     },
     {
@@ -43,38 +43,38 @@
     },
     {
       "ticker": "CSCO",
-      "price": 119.74,
-      "mom": 0.818,
+      "price": 119.73,
+      "mom": 0.8178,
       "volRatio": 1.07
     },
     {
       "ticker": "AVGO",
-      "price": 382.08,
+      "price": 382.07,
       "mom": 0.5166,
       "volRatio": 1.02
     },
     {
       "ticker": "AMAT",
       "price": 588.97,
-      "mom": 2.4501,
+      "mom": 2.4502,
       "volRatio": 1.01
     },
     {
       "ticker": "ABBV",
-      "price": 234.96,
-      "mom": 0.3203,
+      "price": 234.89,
+      "mom": 0.3199,
       "volRatio": 1
     },
     {
       "ticker": "GS",
-      "price": 1076.55,
-      "mom": 0.6977,
+      "price": 1076.91,
+      "mom": 0.6983,
       "volRatio": 0.99
     },
     {
       "ticker": "MS",
-      "price": 220.11,
-      "mom": 0.6823,
+      "price": 219.86,
+      "mom": 0.6803,
       "volRatio": 0.98
     }
   ],
@@ -83,7 +83,7 @@
       "key": "美股",
       "etf": "SPY",
       "weight": 0.3,
-      "price": 733.3
+      "price": 733.24
     },
     {
       "key": "动量",
@@ -107,19 +107,19 @@
       "key": "黄金",
       "etf": "GLD",
       "weight": 0.05,
-      "price": 366
+      "price": 365.92
     },
     {
       "key": "A股",
       "etf": "ASHR",
       "weight": 0.025,
-      "price": 35.87
+      "price": 35.86
     },
     {
       "key": "港股",
       "etf": "FXI",
       "weight": 0.025,
-      "price": 32.37
+      "price": 32.36
     },
     {
       "key": "现金",
