@@ -1,6 +1,6 @@
 {
   "asOf": "2026-06-24",
-  "generatedAt": "2026-06-24T23:08:55.003Z",
+  "generatedAt": "2026-06-25T05:02:52.367Z",
   "capitalBase": 1000000,
   "universeCount": 66,
   "risk": {
@@ -21,7 +21,7 @@
       "ticker": "MU",
       "price": 1048.51,
       "mom": 7.6093,
-      "volRatio": 1.48
+      "volRatio": 1.49
     },
     {
       "ticker": "INTC",
