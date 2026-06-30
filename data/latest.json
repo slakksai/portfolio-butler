@@ -1,6 +1,6 @@
 {
   "asOf": "2026-06-26",
-  "generatedAt": "2026-06-29T05:28:45.435Z",
+  "generatedAt": "2026-06-30T05:00:34.277Z",
   "capitalBase": 1000000,
   "universeCount": 66,
   "risk": {
@@ -60,10 +60,10 @@
       "volRatio": 1.06
     },
     {
-      "ticker": "HON",
-      "price": 464.42,
-      "mom": 1.1866,
-      "volRatio": 1.04
+      "ticker": "RTX",
+      "price": 187.99,
+      "mom": 0.3509,
+      "volRatio": 1.06
     },
     {
       "ticker": "AAPL",
