@@ -1,6 +1,6 @@
 {
   "asOf": "2026-07-02",
-  "generatedAt": "2026-07-03T04:40:11.671Z",
+  "generatedAt": "2026-07-06T05:08:34.993Z",
   "capitalBase": 1000000,
   "universeCount": 66,
   "risk": {
@@ -10,9 +10,9 @@
     "ddFromHigh": -0.0169
   },
   "circuit": {
-    "mom3y": 1.5586,
+    "mom3y": 1.5574,
     "spy3y": 0.7724,
-    "excess": 0.7862,
+    "excess": 0.785,
     "momentumWeight": 0.2,
     "status": "正常满仓"
   },
