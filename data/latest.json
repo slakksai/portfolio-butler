@@ -1,80 +1,80 @@
 {
-  "asOf": "2026-07-24",
-  "generatedAt": "2026-07-27T04:33:55.935Z",
+  "asOf": "2026-07-27",
+  "generatedAt": "2026-07-28T03:58:50.798Z",
   "capitalBase": 1000000,
   "universeCount": 66,
   "risk": {
     "spyAboveMA200": true,
-    "spyPrice": 738.9299926757812,
-    "spyMA200Adj": 695.43,
-    "ddFromHigh": -0.0247
+    "spyPrice": 739.0900268554688,
+    "spyMA200Adj": 695.81,
+    "ddFromHigh": -0.0245
   },
   "circuit": {
-    "mom3y": 1.2382,
-    "spy3y": 0.685,
-    "excess": 0.5532,
+    "mom3y": 1.7339,
+    "spy3y": 0.6966,
+    "excess": 1.0373,
     "momentumWeight": 0.2,
     "status": "正常满仓"
   },
   "momentum": [
     {
       "ticker": "MU",
-      "price": 920.95,
-      "mom": 7.3987,
+      "price": 900.2,
+      "mom": 7.0699,
       "volRatio": 1.45
     },
     {
       "ticker": "AMAT",
-      "price": 536.25,
-      "mom": 1.8885,
+      "price": 516.89,
+      "mom": 1.7678,
       "volRatio": 1.19
     },
     {
-      "ticker": "INTC",
-      "price": 92.32,
-      "mom": 2.9302,
-      "volRatio": 1.14
-    },
-    {
       "ticker": "CSCO",
-      "price": 114.17,
-      "mom": 0.6983,
+      "price": 114.57,
+      "mom": 0.7124,
       "volRatio": 1.14
     },
     {
       "ticker": "TXN",
-      "price": 279.58,
-      "mom": 0.5432,
+      "price": 279.41,
+      "mom": 0.5469,
+      "volRatio": 1.13
+    },
+    {
+      "ticker": "INTC",
+      "price": 91.67,
+      "mom": 3.0508,
       "volRatio": 1.12
     },
     {
       "ticker": "AAPL",
-      "price": 333.02,
-      "mom": 0.5612,
-      "volRatio": 1.1
+      "price": 336.91,
+      "mom": 0.5824,
+      "volRatio": 1.11
     },
     {
       "ticker": "CAT",
-      "price": 888.73,
-      "mom": 1.0972,
+      "price": 873.28,
+      "mom": 1.0515,
       "volRatio": 1.1
     },
     {
       "ticker": "ABBV",
-      "price": 259.36,
-      "mom": 0.4033,
-      "volRatio": 1.09
+      "price": 256.91,
+      "mom": 0.388,
+      "volRatio": 1.08
     },
     {
       "ticker": "RTX",
-      "price": 212.79,
-      "mom": 0.3814,
-      "volRatio": 1.04
+      "price": 218.42,
+      "mom": 0.4296,
+      "volRatio": 1.05
     },
     {
       "ticker": "GS",
-      "price": 1061.23,
-      "mom": 0.5088,
+      "price": 1048.23,
+      "mom": 0.4869,
       "volRatio": 1.01
     }
   ],
@@ -83,7 +83,7 @@
       "key": "美股",
       "etf": "SPY",
       "weight": 0.3,
-      "price": 738.93
+      "price": 739.09
     },
     {
       "key": "动量",
@@ -95,31 +95,31 @@
       "key": "趋势",
       "etf": "DBMF",
       "weight": 0.15,
-      "price": 31.41
+      "price": 31.27
     },
     {
       "key": "国债",
       "etf": "IEF",
       "weight": 0.22,
-      "price": 93.03
+      "price": 93.28
     },
     {
       "key": "黄金",
       "etf": "GLD",
       "weight": 0.05,
-      "price": 371.9
+      "price": 374.63
     },
     {
       "key": "A股",
       "etf": "ASHR",
       "weight": 0.025,
-      "price": 34.36
+      "price": 34.77
     },
     {
       "key": "港股",
       "etf": "FXI",
       "weight": 0.025,
-      "price": 34.58
+      "price": 35.28
     },
     {
       "key": "现金",
