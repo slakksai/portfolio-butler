@@ -1,6 +1,6 @@
 {
   "asOf": "2026-07-27",
-  "generatedAt": "2026-07-28T03:58:50.798Z",
+  "generatedAt": "2026-07-29T04:09:28.632Z",
   "capitalBase": 1000000,
   "universeCount": 66,
   "risk": {
@@ -75,7 +75,7 @@
       "ticker": "GS",
       "price": 1048.23,
       "mom": 0.4869,
-      "volRatio": 1.01
+      "volRatio": 1.02
     }
   ],
   "sleeves": [
