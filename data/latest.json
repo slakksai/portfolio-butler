@@ -1,81 +1,81 @@
 {
-  "asOf": "2026-11-18",
-  "generatedAt": "2026-11-19T08:21:56.093Z",
+  "asOf": "2026-11-19",
+  "generatedAt": "2026-11-20T08:01:38.135Z",
   "capitalBase": 1000000,
   "universeCount": 66,
   "risk": {
-    "spyAboveMA200": true,
-    "spyPrice": 730.2000122070312,
-    "spyMA200Adj": 730.02,
-    "ddFromHigh": -0.0628
+    "spyAboveMA200": false,
+    "spyPrice": 715.8699951171875,
+    "spyMA200Adj": 730.2,
+    "ddFromHigh": -0.0811
   },
   "circuit": {
-    "mom3y": 1.1576,
-    "spy3y": 0.7201,
-    "excess": 0.4375,
+    "mom3y": 1.0869,
+    "spy3y": 0.6542,
+    "excess": 0.4327,
     "momentumWeight": 0.2,
     "status": "正常满仓"
   },
   "momentum": [
     {
       "ticker": "INTC",
-      "price": 54.67,
-      "mom": 0.5751,
-      "volRatio": 1.02
+      "price": 55.72,
+      "mom": 0.6231,
+      "volRatio": 1.03
     },
     {
       "ticker": "KO",
-      "price": 98.09,
-      "mom": 0.4247,
-      "volRatio": 0.99
+      "price": 96.09,
+      "mom": 0.3851,
+      "volRatio": 1
     },
     {
       "ticker": "SBUX",
-      "price": 109.11,
-      "mom": 0.3353,
-      "volRatio": 0.98
+      "price": 104.47,
+      "mom": 0.284,
+      "volRatio": 0.99
     },
     {
       "ticker": "AMAT",
-      "price": 352.3,
-      "mom": 0.5489,
-      "volRatio": 0.91
+      "price": 338.93,
+      "mom": 0.5162,
+      "volRatio": 0.92
     },
     {
-      "ticker": "LMT",
-      "price": 578.19,
-      "mom": 0.2599,
+      "ticker": "WMT",
+      "price": 126.04,
+      "mom": 0.2536,
       "volRatio": 0.91
     },
     {
       "ticker": "TXN",
-      "price": 292.43,
-      "mom": 0.9279,
-      "volRatio": 0.9
+      "price": 285.75,
+      "mom": 0.8559,
+      "volRatio": 0.91
     },
     {
       "ticker": "JNJ",
-      "price": 272.7,
-      "mom": 0.3972,
-      "volRatio": 0.9
+      "price": 267.14,
+      "mom": 0.3658,
+      "volRatio": 0.91
     },
     {
       "ticker": "AAPL",
-      "price": 352.45,
-      "mom": 0.3224,
+      "price": 349.21,
+      "mom": 0.3103,
       "volRatio": 0.9
     },
     {
       "ticker": "DE",
-      "price": 644.75,
-      "mom": 0.37,
+      "price": 624.89,
+      "mom": 0.3338,
       "volRatio": 0.89
     },
     {
-      "ticker": "LLY",
-      "price": 1382.75,
-      "mom": 0.3616,
-      "volRatio": 0.87
+      "ticker": "UPS",
+      "price": 109.11,
+      "mom": 0.2494,
+      "volRatio": 0.88
     }
   ],
   "sleeves": [
@@ -83,7 +83,7 @@
       "key": "美股",
       "etf": "SPY",
       "weight": 0.3,
-      "price": 730.2
+      "price": 715.87
     },
     {
       "key": "动量",
@@ -95,31 +95,31 @@
       "key": "趋势",
       "etf": "DBMF",
       "weight": 0.15,
-      "price": 31.89
+      "price": 31.8
     },
     {
       "key": "国债",
       "etf": "IEF",
       "weight": 0.22,
-      "price": 90.67
+      "price": 90.82
     },
     {
       "key": "黄金",
       "etf": "GLD",
       "weight": 0.05,
-      "price": 341.19
+      "price": 335.18
     },
     {
       "key": "A股",
       "etf": "ASHR",
       "weight": 0.025,
-      "price": 29.83
+      "price": 29.5
     },
     {
       "key": "港股",
       "etf": "FXI",
       "weight": 0.025,
-      "price": 32.39
+      "price": 31.79
     },
     {
       "key": "现金",
